@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Demo01 {
+public class Demo02 {
     public static void main(String[] args) {
         System.out.println("=== Cafeteria Billing ===");
 

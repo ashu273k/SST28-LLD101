@@ -1,4 +1,4 @@
-public class Main {
+public class Demo01 {
     public static void main(String[] args) {
        
         StudentParser parser = new StudentParser();
