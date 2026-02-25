@@ -1,6 +1,32 @@
 import java.util.List;
 
-// It has the single responsibility of printing the data
+/*
+ * ─── SRP REFACTOR: OnboardingPrinter ───
+ *
+ * PROBLEM SOLVED:
+ *   Originally, all System.out.println() calls were scattered inside
+ *   OnboardingService — header printing, input echo, confirmation,
+ *   error display, and DB dump were all mixed with business logic.
+ *   Changing the output format (e.g., to JSON or a GUI) required
+ *   editing the core workflow.
+ *
+ * WHY WE CREATED THIS CLASS:
+ *   Extracted ALL printing/formatting logic into its own class with
+ *   ONE responsibility: displaying output to the console. Follows SRP.
+ *   - Each method handles one type of output (header, input, errors, etc.).
+ *   - The service calls printer methods instead of doing System.out directly.
+ *
+ * HOW IT WORKS:
+ *   Provides focused methods: printHeader(), printInput(), printCreated(),
+ *   printSavedCount(), printConfirmation(), printDbDump(), printErrors().
+ *   Each does exactly one print task.
+ *
+ * BENEFIT:
+ *   - Changing output format (console → file, HTML, JSON) = replace or
+ *     extend this one class. Business logic stays untouched.
+ *   - OnboardingService focuses on orchestration, not formatting.
+ *   - Can be swapped with a mock in tests to verify what gets printed.
+ */
 public class OnboardingPrinter {
     
     public void printHeader() {

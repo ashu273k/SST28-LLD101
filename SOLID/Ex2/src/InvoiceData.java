@@ -1,5 +1,22 @@
 import java.util.List;
 
+/*
+ * ─── SRP: InvoiceData (Data Transfer Object) ───
+ *
+ * WHY THIS CLASS EXISTS:
+ *   This DTO carries all computed invoice values from the billing logic
+ *   to the formatter. It's the "bridge" between computation and presentation.
+ *
+ * PROBLEM IT SOLVES:
+ *   Without this, the formatter would need raw order data and would have
+ *   to redo calculations, or the billing method would need to build strings.
+ *   InvoiceData cleanly separates "compute the numbers" from "format them".
+ *
+ * DESIGN DECISIONS:
+ *   - All fields are public final (immutable after creation).
+ *   - Contains: invoiceId, item names/qtys/totals, subtotal, tax, discount, total.
+ *   - Created by CafeteriaSystem, consumed by InvoiceFormatter.
+ */
 public class InvoiceData {
     public final String invoiceId;
     public final List<String> itemNames;

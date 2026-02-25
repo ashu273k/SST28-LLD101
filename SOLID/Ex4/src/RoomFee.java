@@ -1,9 +1,25 @@
 import java.util.*;
 
-/**
- * Maps a legacy room-type code to its monthly base price.
- * New room types are added by calling {@link #register} —
- * the calculator never needs to change.
+/*
+ * ─── OCP: RoomFee — Room Pricing as a FeeComponent ───
+ *
+ * PROBLEM SOLVED:
+ *   Room pricing was a switch-case inside the calculator. Each new room type
+ *   meant editing that switch. Now room prices live in a registry (Map),
+ *   and RoomFee implements FeeComponent.
+ *
+ * HOW IT WORKS:
+ *   - A static Map<Integer, Money> holds prices for each room type.
+ *   - Pre-loaded with SINGLE, DOUBLE, TRIPLE, DELUXE prices.
+ *   - monthlyFee() looks up the price by roomType code.
+ *   - register() allows adding NEW room types at runtime without editing code.
+ *
+ * WHY THIS DESIGN:
+ *   - The calculator never has a switch on room types — it just calls
+ *     monthlyFee() on whatever FeeComponent it receives.
+ *   - To add a new room type: call RoomFee.register(5, new Money(18000)).
+ *     No changes to the calculator or this class's core logic.
+ *   - This is OCP: open for extension (via register), closed for modification.
  */
 public class RoomFee implements FeeComponent {
     private static final Map<Integer, Money> PRICES = new HashMap<>();

@@ -1,3 +1,15 @@
+/*
+ * ─── SRP: ReportPrinter — Separated Printing Responsibility ───
+ *
+ * PROBLEM SOLVED:
+ *   Printing the eligibility report was mixed inside the engine's evaluate
+ *   method. Extracting it follows SRP — the engine evaluates, the printer
+ *   formats and displays.
+ *
+ * HOW IT WORKS:
+ *   Takes a StudentProfile and EligibilityEngineResult and prints a
+ *   human-readable report to the console.
+ */
 public class ReportPrinter {
     public void print(StudentProfile s, EligibilityEngineResult r) {
         System.out.println("Student: " + s.name + " (CGR=" + String.format("%.2f", s.cgr)

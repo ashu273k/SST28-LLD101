@@ -1,3 +1,14 @@
+/*
+ * ─── StudentProfile (Value Object / DTO) ───
+ *
+ * WHY THIS CLASS EXISTS:
+ *   Holds all the data about a student that the eligibility rules need:
+ *   rollNo, name, cgr, attendancePct, earnedCredits, disciplinaryFlag.
+ *   Public final fields make it immutable — rules can read but not modify.
+ *
+ * DESIGN CONSTRAINT:
+ *   "Keep StudentProfile fields unchanged" per exercise requirements.
+ */
 public class StudentProfile {
     public final String rollNo;
     public final String name;

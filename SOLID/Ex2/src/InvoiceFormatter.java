@@ -1,3 +1,27 @@
+/*
+ * ─── SRP REFACTOR: InvoiceFormatter ───
+ *
+ * PROBLEM SOLVED:
+ *   Invoice formatting (building the string with "Invoice# ...", line items,
+ *   subtotal, tax, discount, total) was previously embedded inside
+ *   CafeteriaSystem.checkout(). This mixed money calculations with string
+ *   formatting — any change to the invoice look required editing the
+ *   billing logic.
+ *
+ * WHY WE CREATED THIS CLASS:
+ *   Separated formatting into its own class with ONE responsibility:
+ *   turning an InvoiceData object into a printable string. Follows SRP.
+ *
+ * HOW IT WORKS:
+ *   - Takes an InvoiceData DTO containing all computed values.
+ *   - Builds a formatted string with line items, subtotal, tax, discount, total.
+ *   - Returns the string — CafeteriaSystem just prints and stores it.
+ *
+ * BENEFIT:
+ *   - Changing the invoice format (e.g., to HTML or PDF) = change this class.
+ *   - CafeteriaSystem doesn't know or care about formatting details.
+ *   - Formatting can be tested independently (pass InvoiceData, assert string).
+ */
 public class InvoiceFormatter {
 
     public String format(InvoiceData data) {
